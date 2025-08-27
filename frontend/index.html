@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slack Clone</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="main-container">
+        <aside class="sidebar">
+            <div class="user-profile">
+                <h3>Slack Clone</h3>
+            </div>
+            <nav class="channels">
+                <h3>Channels</h3>
+                <ul id="channel-list">
+                    <li class="active-channel"># general</li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="chat-area">
+            <header class="chat-header">
+                <h2 id="current-channel-name">#general</h2>
+            </header>
+            <div id="message-list" class="message-list"></div>
+            <div class="message-input-container">
+                <input type="text" id="message-input" placeholder="Message #general">
+                <button id="send-button">Send</button>
+            </div>
+        </main>
+    </div>
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,273 @@
+/* --- 1. Global Styles & Font Import --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+    --background-primary: #1e1f22;    /* Main background */
+    --background-secondary: #2b2d31;  /* Pop-ups, inputs */
+    --background-tertiary: #313338;   /* Sidebar, headers */
+    --interactive-normal: #b5bac1;    /* Buttons, icons */
+    --interactive-hover: #dcdee1;     /* Hovered text/icons */
+    --channels-default: #80848e;      /* Channel text color */
+    --text-normal: #f2f3f5;           /* Main text color */
+    --text-muted: #949ba4;            /* Timestamps, subtitles */
+    --brand-accent: #5865f2;          /* Main brand color (like Discord's) */
+    --success-color: #23a559;         /* Online status */
+    --error-color: #f23f42;           /* Error messages */
+    --font-primary: 'Inter', sans-serif;
+}
+
+body {
+    font-family: var(--font-primary);
+    margin: 0;
+    overflow: hidden;
+    color: var(--text-normal);
+    background-color: var(--background-primary);
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- 2. Auth Page Styles (login.html) --- */
+.auth-container {
+    background-color: var(--background-secondary);
+    max-width: 440px;
+    margin: 80px auto;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.auth-container h2 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.tab-container {
+    display: flex;
+    margin-bottom: 1.5rem;
+}
+
+.tab-button {
+    flex-grow: 1;
+    padding: 0.8rem;
+    border: none;
+    background: none;
+    color: var(--channels-default);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    border-bottom: 2px solid var(--background-tertiary);
+}
+
+.tab-button:hover {
+    color: var(--interactive-hover);
+}
+
+.tab-button.active {
+    color: var(--text-normal);
+    border-bottom-color: var(--brand-accent);
+}
+
+.auth-container form input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    margin-bottom: 1rem;
+    border: 1px solid #1e1f22;
+    border-radius: 5px;
+    background-color: var(--background-primary);
+    color: var(--text-normal);
+    font-size: 1rem;
+    transition: border-color 0.2s ease;
+}
+
+.auth-container form input:focus {
+    outline: none;
+    border-color: var(--brand-accent);
+}
+
+.auth-container form button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--brand-accent);
+    color: white;
+    font-weight: 500;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.auth-container form button:hover {
+    background-color: #4752c4;
+}
+
+.error-text {
+    color: var(--error-color);
+    text-align: center;
+    min-height: 1.2em;
+    font-size: 0.9em;
+    margin-top: -0.5rem;
+    margin-bottom: 1rem;
+}
+
+/* --- 3. Main App Layout (index.html) --- */
+.main-container {
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar {
+    width: 240px;
+    background-color: var(--background-secondary);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+
+.chat-area {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--background-tertiary);
+}
+
+/* --- 4. Sidebar Components --- */
+.user-profile {
+    padding: 1rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    z-index: 2;
+}
+
+.channels {
+    padding: 0.5rem 0;
+}
+
+.channels h3 {
+    padding: 0 10px 4px;
+    margin: 0;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--channels-default);
+}
+
+.channels ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.channels li {
+    display: flex;
+    align-items: center;
+    padding: 8px 10px;
+    margin: 2px 8px;
+    border-radius: 5px;
+    color: var(--channels-default);
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.channels li::before {
+    content: '#';
+    margin-right: 8px;
+    font-size: 1.2em;
+    color: var(--channels-default);
+}
+
+.channels li:hover {
+    background-color: #3f4248;
+    color: var(--interactive-hover);
+}
+
+.channels li.active-channel {
+    background-color: #40464f;
+    color: var(--text-normal);
+}
+
+/* --- 5. Chat Area Components --- */
+.chat-header {
+    padding: 1rem;
+    border-bottom: 1px solid var(--background-primary);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    font-weight: 600;
+    z-index: 2;
+}
+
+.message-list {
+    flex-grow: 1;
+    padding: 1.5rem;
+    overflow-y: auto;
+}
+
+/* Custom Scrollbar */
+.message-list::-webkit-scrollbar {
+    width: 8px;
+}
+.message-list::-webkit-scrollbar-track {
+    background: var(--background-secondary);
+}
+.message-list::-webkit-scrollbar-thumb {
+    background: var(--background-primary);
+    border-radius: 4px;
+}
+
+.message {
+    display: flex;
+    margin-bottom: 1.25rem;
+}
+
+.message .sender {
+    font-weight: 600;
+    color: var(--text-normal);
+}
+
+.message .timestamp {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-left: 0.5rem;
+}
+
+.message p {
+    margin: 4px 0 0;
+    line-height: 1.4;
+    color: var(--text-normal);
+}
+
+.message-input-container {
+    padding: 1.5rem;
+    background-color: var(--background-tertiary);
+}
+
+#message-input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--background-secondary);
+    color: var(--text-normal);
+    font-size: 1rem;
+}
+
+#message-input:focus {
+    outline: none;
+}
+
+#send-button {
+    /* Hide the send button, as Enter is more common */
+    display: none;
+}
+
+/* --- 6. Utility --- */
+.hidden {
+    display: none;
+}
