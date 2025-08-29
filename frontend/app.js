@@ -77,7 +77,7 @@ function handleAuthPage() {
             const data = await response.json();
             if (response.ok && data.token) {
                 localStorage.setItem('token', data.token);
-                window.location.href = 'index.html';
+                window.location.href = 'login.html';
             } else {
                 errorMessage.textContent = data.msg || 'Registration failed.';
             }
