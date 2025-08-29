@@ -32,7 +32,7 @@ A real-time messaging application inspired by Slack, built from the ground up wi
 
 ---
 
-##  Setup and Installation
+## ~ Setup and Installation
 
 Follow these steps to get the project running on your local machine.
 
