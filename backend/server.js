@@ -60,6 +60,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const { Server } = require("socket.io");
+const Message = require('./models/Message');
 
 // Import routes
 const authRoutes = require('./routes/authRoutes');
@@ -77,8 +78,8 @@ mongoose.connect("mongodb://127.0.0.1:27017/slack-clone", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 })
-    .then(() => console.log('✅ MongoDB connected...'))
-    .catch(err => console.error('❌ MongoDB connection error:', err));
+    .then(() => console.log(' MongoDB connected...'))
+    .catch(err => console.error(' MongoDB connection error:', err));
 //checking 
 app.get('/', (req, res) => {
     res.send('Hello World!');
@@ -95,24 +96,24 @@ const io = new Server(server, {
 });
 
 io.on('connection', (socket) => {
-    console.log(`🔌 User connected: ${socket.id}`);
+    console.log(` User connected: ${socket.id}`);
 
     // User joins a channel
     socket.on('joinChannel', (channelId) => {
         socket.join(channelId);
-        console.log(`📥 User ${socket.id} joined channel ${channelId}`);
+        console.log(` User ${socket.id} joined channel ${channelId}`);
     });
 
     // Handle sending a message
     socket.on('sendMessage', (message) => {
-        console.log(`💬 Message from ${socket.id} in channel ${message.channel}: ${message.text}`);
+        console.log(` Message from ${socket.id} in channel ${message.channel}: ${message.text}`);
         // Broadcast message to everyone in the same channel
         io.to(message.channel).emit('receiveMessage', message);
     });
 
     // Handle disconnect
     socket.on('disconnect', () => {
-        console.log(`❌ User disconnected: ${socket.id}`);
+        console.log(` User disconnected: ${socket.id}`);
     });
 });
 
